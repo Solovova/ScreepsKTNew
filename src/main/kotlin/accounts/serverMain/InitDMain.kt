@@ -52,10 +52,10 @@ fun constantMainRoomInitMain(mainRoom: MainRoom) {
 }
 
 fun constantSlaveRoomInitMain(slaveRoom: SlaveRoom) {
-    if (slaveRoom.parent.name == "E51N39" && slaveRoom.name == "E49N39") {
-        slaveRoom.need[0][0] = 0
-        slaveRoom.need[0][2] = 4
-    }
+//    if (slaveRoom.parent.name == "E51N39" && slaveRoom.name == "E49N39") {
+//        slaveRoom.need[0][0] = 0
+//        slaveRoom.need[0][2] = 4
+//    }
 
 
 }

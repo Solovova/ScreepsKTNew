@@ -99,7 +99,7 @@ fun MainRoomCollector.terminalSentEnergyOverflow() {
 
     //Emergency to
     var mainRoomTo: MainRoom? = this.rooms.values.filter {
-        it.constant.levelOfRoom >= 2
+        it.structureTerminal[0] != null
                 && it.getResource() < emergencyMineralQuantity
     }.minBy { it.getResource() }
 

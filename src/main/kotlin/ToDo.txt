@@ -2,6 +2,8 @@ In future
 //ToDo Room snapshot for auto reconstruction
 //ToDo если в комнате минерала больше чем надо не прозводить
 //ToDo разобраться почему нет минералов
+//ToDo тестировать при downgrade controller
+//ToDo убирать комнаты из констант если не видно ее
 
 //Main
 // 0 - universal +

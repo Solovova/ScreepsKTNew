@@ -3,6 +3,7 @@ package accounts
 import accounts.serverMain.*
 import accounts.serverTest.*
 import constants.Constants
+import mainContext.MainContext
 import mainContext.MineralDataRecord
 import mainRoom.MainRoom
 import screeps.api.Memory
@@ -31,7 +32,8 @@ fun constantSlaveRoomInit(slaveRoom: SlaveRoom) {
 
 }
 
-fun initMineralData(mineralData: MutableMap<ResourceConstant, MineralDataRecord>) {
-    if (Memory["account"] == "main") initMineralMain(mineralData)
-    if (Memory["account"] == "test") initMineralTest(mineralData)
+fun initMineralData(mainContext: MainContext) {
+    if (Memory["account"] == "main") initMineralMain(mainContext)
+    if (Memory["account"] == "test") initMineralTest(mainContext)
 }
+

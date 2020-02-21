@@ -27,6 +27,18 @@ fun Creep.takeFromStorage(creepCarry: Int, mainContext: MainContext, mainRoom: M
     return result
 }
 
+fun Creep.takeFromTerminal(creepCarry: Int, mainContext: MainContext, mainRoom: MainRoom): Boolean {
+    var result = false
+    if (creepCarry == 0) {
+        val tTerminal: StructureTerminal? = mainRoom.structureTerminal[0]
+        if (tTerminal != null && mainRoom.getResourceInTerminal() > 0) {
+            mainContext.tasks.add(this.id, CreepTask(TypeOfTask.Take, idObject0 = tTerminal.id, posObject0 = tTerminal.pos, resource = RESOURCE_ENERGY))
+            result = true
+        }
+    }
+    return result
+}
+
 fun Creep.transferToStorage(creepCarry: Int, mainContext: MainContext, mainRoom: MainRoom): Boolean {
     var result = false
     if (creepCarry != 0) {

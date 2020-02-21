@@ -6,6 +6,7 @@ import screeps.api.*
 import RESOURCES_ALL
 import accounts.initMineralData
 import mainRoom.MainRoom
+import mainRoomCollector.MainRoomCollector
 import screeps.utils.toMap
 import toSecDigit
 import kotlin.math.max
@@ -83,7 +84,7 @@ fun MainContext.marketShowBuyOrdersRealPrice(resourceConstant: ResourceConstant 
 }
 
 fun MainContext.mineralDataFill() {
-    initMineralData(this.mineralData)
+    initMineralData(this)
     for (res in RESOURCES_ALL) {
         val quantity: Int = this.mainRoomCollector.rooms.values.sumBy { it.getResource(res) }
         val need: Int = this.mainRoomCollector.rooms.values.sumBy { it.needMineral[res] ?: 0 }

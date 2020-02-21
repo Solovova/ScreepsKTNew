@@ -70,13 +70,6 @@ fun Constants.initMainBody() {
     m(15).reactionActive = ""
     m(16).reactionActive = ""
     m(18).reactionActive = ""
-
-
-
-    m(10).defenceHits = 3000000
-
-
-
 }
 
 

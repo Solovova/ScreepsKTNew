@@ -54,6 +54,7 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
     if (this.memory.role == 0) {
         if (!isTask) isTask = this.takeDroppedEnergy(creepCarry, mainContext)
         if (!isTask) isTask = this.takeFromStorage(creepCarry, mainContext, mainRoom)
+        if (!isTask) isTask = this.takeFromTerminal(creepCarry, mainContext, mainRoom)
         if (!isTask) isTask = this.takeFromContainer(3, creepCarry, mainContext, mainRoom)
         if (!isTask) isTask = this.harvestFromSource(2, creepCarry, mainContext, mainRoom)
         if (!isTask) isTask = this.transferToFilling(creepCarry, mainContext, mainRoom)

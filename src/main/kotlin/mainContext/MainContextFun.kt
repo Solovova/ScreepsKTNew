@@ -44,3 +44,13 @@ fun MainContext.getCacheRecordRoom(type: String, mainRoom: MainRoom, slaveRoom: 
     }
     return this.constants.globalConstant.dataCacheCarrierAuto[keyRecord]
 }
+
+fun MainContext.getNumRoomWithContainer():Int {
+    var result = 0
+    for (mainRoom in this.mainRoomCollector.rooms.values) {
+        if (Game.rooms[mainRoom.name] != null && mainRoom.structureStorage[0] != null) {
+            result++
+        }
+    }
+    return result
+}
