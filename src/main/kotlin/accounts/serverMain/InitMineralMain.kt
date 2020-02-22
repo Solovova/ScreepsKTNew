@@ -6,7 +6,6 @@ import mainContext.getNumRoomWithContainer
 import screeps.api.ResourceConstant
 
 fun initMineralMain(mainContext: MainContext) {
-
     mainContext.mineralData["energy".unsafeCast<ResourceConstant>()] = MineralDataRecord(
             priceMax = 0.044,
             priceMin = 0.030,

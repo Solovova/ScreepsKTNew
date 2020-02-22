@@ -19,12 +19,12 @@ fun MainRoom.setLogistTask(creep: Creep) {
     if (getLevelOfRoom() == 3 && this.have[19] != 0 && this.source.size == 1) {
         if (link != null && link.energy < link.energyCapacity && storage != null) {
             val transportQuantity: Int = min(link.energyCapacity - link.energy, creep.carryCapacity)
-            parent.parent.tasks.add(creep.id, CreepTask(TypeOfTask.Transport,  storage.id, storage.pos,link.id, link.pos, RESOURCE_ENERGY, transportQuantity))
+            mainRoomCollector.mainContext.tasks.add(creep.id, CreepTask(TypeOfTask.Transport,  storage.id, storage.pos,link.id, link.pos, RESOURCE_ENERGY, transportQuantity))
             return
         }
     }else{
         if (link != null && link.energy != 0 && storage != null) {
-            parent.parent.tasks.add(creep.id, CreepTask(TypeOfTask.Transport, link.id, link.pos, storage.id, storage.pos, RESOURCE_ENERGY, 0))
+            mainRoomCollector.mainContext.tasks.add(creep.id, CreepTask(TypeOfTask.Transport, link.id, link.pos, storage.id, storage.pos, RESOURCE_ENERGY, 0))
             return
         }
     }
@@ -41,7 +41,7 @@ fun MainRoom.setLogistTask(creep: Creep) {
     val haveInTerminal01: Int = this.getResourceInTerminal()
     carry = min(min(needInStorage01, haveInTerminal01), creep.carryCapacity)
     if (carry > 0) {
-        parent.parent.tasks.add(creep.id, CreepTask(TypeOfTask.Transport, terminal.id, terminal.pos, storage.id, storage.pos, RESOURCE_ENERGY, carry))
+        mainRoomCollector.mainContext.tasks.add(creep.id, CreepTask(TypeOfTask.Transport, terminal.id, terminal.pos, storage.id, storage.pos, RESOURCE_ENERGY, carry))
         return
     }
 
@@ -51,7 +51,7 @@ fun MainRoom.setLogistTask(creep: Creep) {
     carry = min(min(haveInStorage02, needInTerminal02),creep.carryCapacity)
 
     if (carry > 0 && (carry == creep.carryCapacity || carry == needInTerminal02)) {
-        parent.parent.tasks.add(creep.id, CreepTask(TypeOfTask.Transport, storage.id, storage.pos, terminal.id, terminal.pos, RESOURCE_ENERGY, carry))
+        mainRoomCollector.mainContext.tasks.add(creep.id, CreepTask(TypeOfTask.Transport, storage.id, storage.pos, terminal.id, terminal.pos, RESOURCE_ENERGY, carry))
         return
     }
 
@@ -62,7 +62,7 @@ fun MainRoom.setLogistTask(creep: Creep) {
     carry = min(min(needInTerminal03, haveInStorage03),creep.carryCapacity)
 
     if (carry > 0 && (carry == creep.carryCapacity || carry == needInTerminal03)) {
-        parent.parent.tasks.add(creep.id, CreepTask(TypeOfTask.Transport, storage.id, storage.pos, terminal.id, terminal.pos, RESOURCE_ENERGY, carry))
+        mainRoomCollector.mainContext.tasks.add(creep.id, CreepTask(TypeOfTask.Transport, storage.id, storage.pos, terminal.id, terminal.pos, RESOURCE_ENERGY, carry))
         return
     }
 
@@ -73,7 +73,7 @@ fun MainRoom.setLogistTask(creep: Creep) {
     carry = min(min(haveInTerminal04, needInStorage04), creep.carryCapacity)
 
     if (carry > 0) {
-        parent.parent.tasks.add(creep.id, CreepTask(TypeOfTask.Transport, terminal.id, terminal.pos, storage.id, storage.pos, RESOURCE_ENERGY, carry))
+        mainRoomCollector.mainContext.tasks.add(creep.id, CreepTask(TypeOfTask.Transport, terminal.id, terminal.pos, storage.id, storage.pos, RESOURCE_ENERGY, carry))
         return
     }
 
@@ -81,7 +81,7 @@ fun MainRoom.setLogistTask(creep: Creep) {
     val haveInTerminal05: Int = this.getResourceInTerminal() - this.constant.energyMaxTerminal
     val haveInStore05: Int = this.getResourceInStorage() - this.constant.energyMaxStorage
     if (haveInTerminal05>0 && haveInStore05 > 0)
-        parent.parent.messenger("INFO",this.name,"Too many energy", COLOR_RED)
+        mainRoomCollector.mainContext.messenger("INFO",this.name,"Too many energy", COLOR_RED)
 
 
     //Mineral work
@@ -95,10 +95,10 @@ fun MainRoom.setLogistTask(creep: Creep) {
         val needInTerminal = this.constant.mineralMinTerminal - quantityTerminal
         val canMineralAllTerminal = this.constant.mineralAllMaxTerminal - (terminal.store.toMap().map { it.value }.sum()
         -this.getResourceInTerminal(RESOURCE_ENERGY))
-        if (canMineralAllTerminal <= 0) parent.parent.messenger("INFO",this.name,"Terminal mineral is full", COLOR_RED)
+        if (canMineralAllTerminal <= 0) mainRoomCollector.mainContext.messenger("INFO",this.name,"Terminal mineral is full", COLOR_RED)
         carry = min(min(min(needInTerminal, quantityStorage), creep.carryCapacity), canMineralAllTerminal)
         if (carry > 0) {
-            parent.parent.tasks.add(creep.id, CreepTask(TypeOfTask.Transport, storage.id, storage.pos, terminal.id, terminal.pos, resourceStorage, carry))
+            mainRoomCollector.mainContext.tasks.add(creep.id, CreepTask(TypeOfTask.Transport, storage.id, storage.pos, terminal.id, terminal.pos, resourceStorage, carry))
             return
         }
     }
@@ -112,7 +112,7 @@ fun MainRoom.setLogistTask(creep: Creep) {
         val haveInTerminal = quantityTerminal - this.constant.mineralMinTerminal
         carry = min(haveInTerminal, creep.carryCapacity)
         if (carry > 0) {
-            parent.parent.tasks.add(creep.id, CreepTask(TypeOfTask.Transport, terminal.id, terminal.pos, storage.id, storage.pos, resourceTerminal, carry))
+            mainRoomCollector.mainContext.tasks.add(creep.id, CreepTask(TypeOfTask.Transport, terminal.id, terminal.pos, storage.id, storage.pos, resourceTerminal, carry))
             return
         }
     }

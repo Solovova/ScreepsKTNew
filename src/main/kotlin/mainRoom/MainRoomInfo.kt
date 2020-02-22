@@ -3,7 +3,6 @@ package mainRoom
 import creep.getDescribeForQueue
 import TypeOfMainRoomInfo
 import MainRoomInfoRecord
-import mainContext.messenger
 import screeps.api.*
 import screeps.api.structures.StructureStorage
 import screeps.api.structures.StructureTerminal
@@ -15,7 +14,7 @@ fun MainRoom.getInfoQueue(): MainRoomInfoRecord {
         val recordSpawning = spawn.value.spawning
         if (recordSpawning != null) {
             val creep: Creep? = Game.creeps[recordSpawning.name]
-            textSpawning += creep?.getDescribeForQueue(parent.parent) ?: ""
+            textSpawning += creep?.getDescribeForQueue(mainRoomCollector.mainContext) ?: ""
         }
     }
 

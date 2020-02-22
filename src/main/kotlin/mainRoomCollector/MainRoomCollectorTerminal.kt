@@ -5,7 +5,6 @@ import mainRoom.MainRoom
 import screeps.api.COLOR_GREEN
 import screeps.api.OK
 import screeps.api.RESOURCE_ENERGY
-import screeps.api.ResourceConstant
 import screeps.api.structures.StructureTerminal
 import screeps.utils.toMap
 import kotlin.math.max
@@ -67,14 +66,14 @@ fun MainRoomCollector.terminalSentMineral() {
 
                 val quantityTransfer = min(min(min(
                         haveResourceQuantity, needResourceQuantity),
-                        parent.constants.globalConstant.sentMaxMineralQuantity),
+                        mainContext.constants.globalConstant.sentMaxMineralQuantity),
                         canMineralTakeTerminal)
 
                 //if (needResource == "GH2O".unsafeCast<ResourceConstant>())
                 //    console.log("TEST Room ${roomFrom.name} transfer: $quantityTransfer")
 
                 if (quantityTransfer < needResourceQuantity
-                        && quantityTransfer < parent.constants.globalConstant.sentMaxMineralQuantity
+                        && quantityTransfer < mainContext.constants.globalConstant.sentMaxMineralQuantity
                         && quantityTransfer < haveResourceQuantityInRoom) continue  //wait because not all resource transfer from storage to terminal
 
                 //if (needResource == "GH2O".unsafeCast<ResourceConstant>())
@@ -128,7 +127,7 @@ fun MainRoomCollector.terminalSentEnergyOverflow() {
         if (terminalFrom.cooldown == 0 && terminalTo.cooldown == 0) {
             val result = terminalFrom.send(RESOURCE_ENERGY, sentQuantity, mainRoomTo.name)
             if (result == OK)
-                parent.messenger("INFO", mainRoomFrom.name,
+                mainContext.messenger("INFO", mainRoomFrom.name,
                         "Send energy $sentQuantity from ${mainRoomFrom.name} $sentQuantity -> ${mainRoomTo.name}", COLOR_GREEN)
         }
     }

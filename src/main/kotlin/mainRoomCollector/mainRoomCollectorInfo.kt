@@ -35,8 +35,6 @@ fun MainRoomCollector.infoShow() {
                     prefix = "(",
                     suffix = ")"),
 
-
-
             MainRoomInfoSetup(TypeOfMainRoomInfo.infoController,
                     "Controller",
                     COLOR_WHITE,

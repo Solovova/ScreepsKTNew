@@ -6,13 +6,13 @@ import mainContext.getCacheRecordRoom
 fun MainRoom.needCorrection1() {
     //1 harvester ,carrier ,filler , small harvester-filler, small filler
     //1.1 harvester ,carrier
-    val carrierAuto0: CacheCarrier? = parent.parent.getCacheRecordRoom("mainContainer0",this)
+    val carrierAuto0: CacheCarrier? = mainRoomCollector.mainContext.getCacheRecordRoom("mainContainer0",this)
     if (carrierAuto0!=null) {
         if (this.need[1][1] == 0) this.need[1][1] = 1
         if (this.need[1][2] == 0) this.need[1][2] = carrierAuto0.needCarriers
     }
 
-    val carrierAuto1: CacheCarrier? = parent.parent.getCacheRecordRoom("mainContainer1",this)
+    val carrierAuto1: CacheCarrier? = mainRoomCollector.mainContext.getCacheRecordRoom("mainContainer1",this)
     if (carrierAuto1!=null) {
         if (this.need[1][3] == 0) this.need[1][3] = 1
         if (this.need[1][4] == 0) this.need[1][4] = carrierAuto1.needCarriers

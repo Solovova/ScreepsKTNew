@@ -25,7 +25,7 @@ fun SlaveRoom.restoreSnapShot(){
     if (this.room == null) return
     if (this.room.find(FIND_CONSTRUCTION_SITES).isNotEmpty()) return
     if (Memory["snap"] == null || Memory["snap"][this.name] == null){
-        parent.parent.parent.messenger("INFO", this.name, "Slave snapshot not present", COLOR_RED)
+        parent.mainRoomCollector.mainContext.messenger("INFO", this.name, "Slave snapshot not present", COLOR_RED)
         return
     }
     val d:Array<RecordOfStructurePosition> = snapshotDeserialize(Memory["snap"][this.name] as String,this.name)

@@ -16,7 +16,7 @@ import screeps.utils.toMap
 import kotlin.math.min
 import kotlin.random.Random
 
-class MainRoom(val parent: MainRoomCollector, val name: String, val describe: String, val constant: MainRoomConstant) {
+class MainRoom(val mainRoomCollector: MainRoomCollector, val name: String, val describe: String, val constant: MainRoomConstant) {
     val room: Room = Game.rooms[this.name] ?: throw AssertionError("Not room $this.name")
     val slaveRooms: MutableMap<String, SlaveRoom> = mutableMapOf()
 
@@ -356,8 +356,8 @@ class MainRoom(val parent: MainRoomCollector, val name: String, val describe: St
 
     private fun getTimeDeath(fRole: Int): Int {
         return when (fRole) {
-            2 -> parent.parent.getCacheRecordRoom("mainContainer0", this)?.timeForDeath ?: 0
-            4 -> parent.parent.getCacheRecordRoom("mainContainer1", this)?.timeForDeath ?: 0
+            2 -> mainRoomCollector.mainContext.getCacheRecordRoom("mainContainer0", this)?.timeForDeath ?: 0
+            4 -> mainRoomCollector.mainContext.getCacheRecordRoom("mainContainer1", this)?.timeForDeath ?: 0
             else -> 0
         }
     }
@@ -430,9 +430,9 @@ class MainRoom(val parent: MainRoomCollector, val name: String, val describe: St
             }
 
             2 -> {
-                val carrierAuto: CacheCarrier? = parent.parent.getCacheRecordRoom("mainContainer0", this)
+                val carrierAuto: CacheCarrier? = mainRoomCollector.mainContext.getCacheRecordRoom("mainContainer0", this)
                 if (carrierAuto == null) {
-                    parent.parent.messenger("ERROR", this.name, "Auto not exists mainContainer0", COLOR_RED)
+                    mainRoomCollector.mainContext.messenger("ERROR", this.name, "Auto not exists mainContainer0", COLOR_RED)
                     result = arrayOf(MOVE, MOVE, MOVE, MOVE, MOVE, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY)
                 } else {
                     result = carrierAuto.needBody
@@ -440,9 +440,9 @@ class MainRoom(val parent: MainRoomCollector, val name: String, val describe: St
             }
 
             4 -> {
-                val carrierAuto: CacheCarrier? = parent.parent.getCacheRecordRoom("mainContainer1", this)
+                val carrierAuto: CacheCarrier? = mainRoomCollector.mainContext.getCacheRecordRoom("mainContainer1", this)
                 if (carrierAuto == null) {
-                    parent.parent.messenger("ERROR", this.name, "Auto not exists mainContainer1", COLOR_RED)
+                    mainRoomCollector.mainContext.messenger("ERROR", this.name, "Auto not exists mainContainer1", COLOR_RED)
                     result = arrayOf(MOVE, MOVE, MOVE, MOVE, MOVE, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY)
                 } else {
                     result = carrierAuto.needBody
@@ -556,7 +556,7 @@ class MainRoom(val parent: MainRoomCollector, val name: String, val describe: St
 
             //Battle group
             if (this.queue[0].role == 99) {
-                val resultBgSpawn = this.parent.parent.battleGroupContainer.spawnCreep(this,spawn)
+                val resultBgSpawn = this.mainRoomCollector.mainContext.battleGroupContainer.spawnCreep(this,spawn)
                 if (resultBgSpawn == BgSpawnResult.StartSpawn) continue
                 if (resultBgSpawn == BgSpawnResult.CantSpawn) return
                 if (resultBgSpawn == BgSpawnResult.QueueEmpty) {
@@ -701,15 +701,15 @@ class MainRoom(val parent: MainRoomCollector, val name: String, val describe: St
             val slaveRoomConstant: SlaveRoomConstant? = this.constant.slaveRoomConstantContainer[slaveName]
             if (slaveRoomConstant != null)
                 slaveRooms[slaveName] = SlaveRoom(this, slaveName, "${this.describe}S$index", slaveRoomConstant)
-            else parent.parent.messenger("ERROR", "${this.name} $slaveName", "initialization don't see constant", COLOR_RED)
+            else mainRoomCollector.mainContext.messenger("ERROR", "${this.name} $slaveName", "initialization don't see constant", COLOR_RED)
         }
     }
 
     private fun setNextTickRun(): Boolean {
         if (this.constant.roomRunNotEveryTickNextTickRun > Game.time) return false
-        this.constant.roomRunNotEveryTickNextTickRun = Game.time + Random.nextInt(parent.parent.constants.globalConstant.roomRunNotEveryTickTicksPauseMin,
-                parent.parent.constants.globalConstant.roomRunNotEveryTickTicksPauseMax)
-        parent.parent.messenger("TEST", this.name, "Main room not every tick run. Next tick: ${this.constant.roomRunNotEveryTickNextTickRun}", COLOR_GREEN)
+        this.constant.roomRunNotEveryTickNextTickRun = Game.time + Random.nextInt(mainRoomCollector.mainContext.constants.globalConstant.roomRunNotEveryTickTicksPauseMin,
+                mainRoomCollector.mainContext.constants.globalConstant.roomRunNotEveryTickTicksPauseMax)
+        mainRoomCollector.mainContext.messenger("TEST", this.name, "Main room not every tick run. Next tick: ${this.constant.roomRunNotEveryTickNextTickRun}", COLOR_GREEN)
         return true
     }
 
@@ -720,7 +720,7 @@ class MainRoom(val parent: MainRoomCollector, val name: String, val describe: St
             try {
                 room.runInStartOfTick()
             } catch (e: Exception) {
-                parent.parent.messenger("ERROR", "Slave room in start", room.name, COLOR_RED)
+                mainRoomCollector.mainContext.messenger("ERROR", "Slave room in start", room.name, COLOR_RED)
             }
         }
         this.setMineralNeed()
@@ -737,7 +737,7 @@ class MainRoom(val parent: MainRoomCollector, val name: String, val describe: St
             try {
                 room.runInEndOfTick()
             } catch (e: Exception) {
-                parent.parent.messenger("ERROR", "Slave room in end", room.name, COLOR_RED)
+                mainRoomCollector.mainContext.messenger("ERROR", "Slave room in end", room.name, COLOR_RED)
             }
         }
 
@@ -749,7 +749,7 @@ class MainRoom(val parent: MainRoomCollector, val name: String, val describe: St
     private fun alarmStorage() {
         val storage : StructureStorage = this.structureStorage[0] ?: return
         if (storage.store.values.sum() > 800000) {
-            parent.parent.messenger("INFO", this.name, "Storage full", COLOR_RED)
+            mainRoomCollector.mainContext.messenger("INFO", this.name, "Storage full", COLOR_RED)
         }
     }
 
@@ -758,7 +758,7 @@ class MainRoom(val parent: MainRoomCollector, val name: String, val describe: St
             try {
                 record.value.runNotEveryTick()
             } catch (e: Exception) {
-                parent.parent.messenger("ERROR", "Slave not every tick", record.value.name, COLOR_RED)
+                mainRoomCollector.mainContext.messenger("ERROR", "Slave not every tick", record.value.name, COLOR_RED)
             }
         }
 
@@ -955,7 +955,7 @@ class MainRoom(val parent: MainRoomCollector, val name: String, val describe: St
         val lab0 = this.structureLabSort[0] ?: return
         val lab1 = this.structureLabSort[1] ?: return
         val reaction = this.constant.reactionActive.unsafeCast<ResourceConstant>()
-        val reactionComponent = this.parent.parent.constants.globalConstant.labReactionComponent[reaction]
+        val reactionComponent = this.mainRoomCollector.mainContext.constants.globalConstant.labReactionComponent[reaction]
                 ?: return
         if (reactionComponent.size != 2) return
         if (lab0.mineralAmount != 0 && lab0.mineralType.unsafeCast<ResourceConstant>() != reactionComponent[0]) return
@@ -972,7 +972,7 @@ class MainRoom(val parent: MainRoomCollector, val name: String, val describe: St
         if (this.constant.reactionActive != "") {
             val reaction = this.constant.reactionActive.unsafeCast<ResourceConstant>()
             if (this.structureLabSort.size !in arrayOf(3, 6, 10)) return
-            val reactionComponent = this.parent.parent.constants.globalConstant.labReactionComponent[reaction]
+            val reactionComponent = this.mainRoomCollector.mainContext.constants.globalConstant.labReactionComponent[reaction]
                     ?: return
             this.needMineral[reactionComponent[0]] = (this.needMineral[reactionComponent[0]]
                     ?: 0) + 2000

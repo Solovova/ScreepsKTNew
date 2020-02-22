@@ -20,16 +20,16 @@ import upgradeQuantity
 import upgradeResource
 import kotlin.math.roundToInt
 
-class MainRoomCollector(val parent: MainContext, names: Array<String>) {
+class MainRoomCollector(val mainContext: MainContext, names: Array<String>) {
     val rooms: MutableMap<String, MainRoom> = mutableMapOf()
     val flags = Game.flags.toMap().values.toList()
 
     init {
         names.forEachIndexed { index, name ->
-            val mainRoomConstant: MainRoomConstant? = this.parent.constants.mainRoomConstantContainer[name]
+            val mainRoomConstant: MainRoomConstant? = this.mainContext.constants.mainRoomConstantContainer[name]
             if (mainRoomConstant != null && Game.rooms[name] != null && (Game.rooms[name]?.controller?.my == true))
                 rooms[name] = MainRoom(this, name, "M${index.toString().padStart(2, '0')}", mainRoomConstant)
-            else parent.messenger("ERROR", name, "initialization don't see mainRoomConstant", COLOR_RED)
+            else mainContext.messenger("ERROR", name, "initialization don't see mainRoomConstant", COLOR_RED)
         }
     }
 
@@ -51,7 +51,7 @@ class MainRoomCollector(val parent: MainContext, names: Array<String>) {
                 if (creep.spawning && creep.memory.upgrade == "") {
                     if (mainRoom.constant.creepUpgradeRole[creep.memory.role] == true) {
                         var upgradeParts = mainRoom.constant.creepUpgradableParts[creep.memory.role]
-                        if (upgradeParts == null) upgradeParts = parent.constants.globalConstant.creepUpgradableParts[creep.memory.role]
+                        if (upgradeParts == null) upgradeParts = mainContext.constants.globalConstant.creepUpgradableParts[creep.memory.role]
                         if (upgradeParts != null) {
                             for (upgradePart in upgradeParts) {
                                 val quantityParts: Int = creep.body.filter { it.type == upgradePart.key }.size
@@ -145,13 +145,11 @@ class MainRoomCollector(val parent: MainContext, names: Array<String>) {
                 if (Game.getObjectById<Creep>(key) == null)
                     delete(Memory["profit"][key])
         } catch (e: Exception) {
-            parent.messenger("ERROR", "Clear in creep profit", "", COLOR_RED)
+            mainContext.messenger("ERROR", "Clear in creep profit", "", COLOR_RED)
         }
     }
 
     fun runInStartOfTick() {
-
-
         this.creepsCalculate()
         this.creepsCalculateProfit()
 
@@ -159,11 +157,9 @@ class MainRoomCollector(val parent: MainContext, names: Array<String>) {
             try {
                 room.runInStartOfTick()
             } catch (e: Exception) {
-                parent.messenger("ERROR", "Room in start of tick", room.name, COLOR_RED)
+                mainContext.messenger("ERROR", "Room in start of tick", room.name, COLOR_RED)
             }
         }
-
-
     }
 
     fun runNotEveryTick() {
@@ -171,7 +167,7 @@ class MainRoomCollector(val parent: MainContext, names: Array<String>) {
             try {
                 record.value.runNotEveryTick()
             } catch (e: Exception) {
-                parent.messenger("ERROR", "Room not every tick", record.value.room.name, COLOR_RED)
+                mainContext.messenger("ERROR", "Room not every tick", record.value.room.name, COLOR_RED)
             }
         }
         this.houseKeeping()
@@ -182,7 +178,7 @@ class MainRoomCollector(val parent: MainContext, names: Array<String>) {
             try {
                 room.runInEndOfTick()
             } catch (e: Exception) {
-                parent.messenger("ERROR", "Room in end of tick", room.name, COLOR_RED)
+                mainContext.messenger("ERROR", "Room in end of tick", room.name, COLOR_RED)
             }
         }
 
@@ -191,15 +187,15 @@ class MainRoomCollector(val parent: MainContext, names: Array<String>) {
         val cpuStartCreeps = Game.cpu.getUsed()
         for (creep in Game.creeps.values) {
             try {
-                creep.newTask(this.parent)
+                creep.newTask(this.mainContext)
             } catch (e: Exception) {
-                parent.messenger("ERROR", "CREEP New task", "${creep.memory.mainRoom} ${creep.memory.slaveRoom} ${creep.memory.role} ${creep.id}", COLOR_RED)
+                mainContext.messenger("ERROR", "CREEP New task", "${creep.memory.mainRoom} ${creep.memory.slaveRoom} ${creep.memory.role} ${creep.id}", COLOR_RED)
             }
 
             try {
-                creep.doTask(this.parent)
+                creep.doTask(this.mainContext)
             } catch (e: Exception) {
-                parent.messenger("ERROR", "CREEP Do task", "${creep.memory.mainRoom} ${creep.memory.slaveRoom} ${creep.memory.role} ${creep.id}", COLOR_RED)
+                mainContext.messenger("ERROR", "CREEP Do task", "${creep.memory.mainRoom} ${creep.memory.slaveRoom} ${creep.memory.role} ${creep.id}", COLOR_RED)
             }
         }
 

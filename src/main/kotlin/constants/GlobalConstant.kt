@@ -49,8 +49,5 @@ class GlobalConstant(val constants: Constants) {
         if (d["dataCacheCarrierAuto"] != null)
             for (recordKey in js("Object").keys(d["dataCacheCarrierAuto"]).unsafeCast<Array<String>>())
                 dataCacheCarrierAuto[recordKey] = CacheCarrier.initFromDynamic(d["dataCacheCarrierAuto"][recordKey])
-
-
-
     }
 }

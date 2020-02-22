@@ -196,11 +196,11 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
 
     private fun getTimeDeath(fRole: Int): Int {
         return when (fRole) {
-            106 -> parent.parent.parent.getCacheRecordRoom("slaveContainer0", this.parent,this)?.timeForDeath ?: 0
-            108 -> parent.parent.parent.getCacheRecordRoom("slaveContainer1", this.parent,this)?.timeForDeath ?: 0
-            121 -> parent.parent.parent.getCacheRecordRoom("slaveContainer0", this.parent,this)?.timeForDeath ?: 0
-            123 -> parent.parent.parent.getCacheRecordRoom("slaveContainer1", this.parent,this)?.timeForDeath ?: 0
-            125 -> parent.parent.parent.getCacheRecordRoom("slaveContainer2", this.parent,this)?.timeForDeath ?: 0
+            106 -> parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer0", this.parent,this)?.timeForDeath ?: 0
+            108 -> parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer1", this.parent,this)?.timeForDeath ?: 0
+            121 -> parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer0", this.parent,this)?.timeForDeath ?: 0
+            123 -> parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer1", this.parent,this)?.timeForDeath ?: 0
+            125 -> parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer2", this.parent,this)?.timeForDeath ?: 0
             else -> 0
         }
     }
@@ -248,9 +248,9 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
             }
 
             106 -> {
-                val carrierAuto: CacheCarrier? = parent.parent.parent.getCacheRecordRoom("slaveContainer0",this.parent,this)
+                val carrierAuto: CacheCarrier? = parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer0",this.parent,this)
                 if (carrierAuto==null) {
-                    parent.parent.parent.messenger("ERROR", this.name, "Auto not exists slaveContainer0", COLOR_RED)
+                    parent.mainRoomCollector.mainContext.messenger("ERROR", this.name, "Auto not exists slaveContainer0", COLOR_RED)
                     result = arrayOf()
                 }else{
                     result = carrierAuto.needBody
@@ -258,9 +258,9 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
             }
 
             108 -> {
-                val carrierAuto: CacheCarrier? = parent.parent.parent.getCacheRecordRoom("slaveContainer1",this.parent,this)
+                val carrierAuto: CacheCarrier? = parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer1",this.parent,this)
                 if (carrierAuto==null) {
-                    parent.parent.parent.messenger("ERROR", this.name, "Auto not exists slaveContainer0", COLOR_RED)
+                    parent.mainRoomCollector.mainContext.messenger("ERROR", this.name, "Auto not exists slaveContainer0", COLOR_RED)
                     result = arrayOf()
                 }else{
                     result = carrierAuto.needBody
@@ -288,9 +288,9 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
             }
 
             121 -> {
-                val carrierAuto: CacheCarrier? = parent.parent.parent.getCacheRecordRoom("slaveContainer0",this.parent,this)
+                val carrierAuto: CacheCarrier? = parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer0",this.parent,this)
                 if (carrierAuto==null) {
-                    parent.parent.parent.messenger("ERROR", this.name, "Auto not exists slaveContainer0", COLOR_RED)
+                    parent.mainRoomCollector.mainContext.messenger("ERROR", this.name, "Auto not exists slaveContainer0", COLOR_RED)
                     result = arrayOf()
                 }else{
                     result = carrierAuto.needBody
@@ -298,9 +298,9 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
             }
 
             123 -> {
-                val carrierAuto: CacheCarrier? = parent.parent.parent.getCacheRecordRoom("slaveContainer1",this.parent,this)
+                val carrierAuto: CacheCarrier? = parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer1",this.parent,this)
                 if (carrierAuto==null) {
-                    parent.parent.parent.messenger("ERROR", this.name, "Auto not exists slaveContainer1", COLOR_RED)
+                    parent.mainRoomCollector.mainContext.messenger("ERROR", this.name, "Auto not exists slaveContainer1", COLOR_RED)
                     result = arrayOf()
                 }else{
                     result = carrierAuto.needBody
@@ -308,9 +308,9 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
             }
 
             125 -> {
-                val carrierAuto: CacheCarrier? = parent.parent.parent.getCacheRecordRoom("slaveContainer2",this.parent,this)
+                val carrierAuto: CacheCarrier? = parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer2",this.parent,this)
                 if (carrierAuto==null) {
-                    parent.parent.parent.messenger("ERROR", this.name, "Auto not exists slaveContainer2", COLOR_RED)
+                    parent.mainRoomCollector.mainContext.messenger("ERROR", this.name, "Auto not exists slaveContainer2", COLOR_RED)
                     result = arrayOf()
                 }else{
                     result = carrierAuto.needBody
@@ -362,7 +362,7 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
 
                 //5 Defender
                 if (this.constant.roomHostile) {
-                    parent.parent.parent.messenger("INFO",this.name,"Attacked tpe: ${this.constant.roomHostileType} num:${this.constant.roomHostileNum}", COLOR_RED)
+                    parent.mainRoomCollector.mainContext.messenger("INFO",this.name,"Attacked tpe: ${this.constant.roomHostileType} num:${this.constant.roomHostileNum}", COLOR_RED)
                     if (this.constant.roomHostileNum > 1 ) {
                         if (this.room == null) this.need[0][4] = 1
                     }else {
@@ -400,12 +400,12 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
                 if (this.source[1] != null)  this.need[0][7] = 1
 
                 //4 Carrier
-                val carrierAuto0: CacheCarrier? = parent.parent.parent.getCacheRecordRoom("slaveContainer0",this.parent,this)
+                val carrierAuto0: CacheCarrier? = parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer0",this.parent,this)
                 if (carrierAuto0!=null) {
                     if (this.need[1][6] == 0) this.need[1][6] = carrierAuto0.needCarriers
                 }
 
-                val carrierAuto1: CacheCarrier? = parent.parent.parent.getCacheRecordRoom("slaveContainer1",this.parent,this)
+                val carrierAuto1: CacheCarrier? = parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer1",this.parent,this)
                 if (carrierAuto1!=null) {
                     if (this.need[1][8] == 0) this.need[1][8] = carrierAuto1.needCarriers
                 }
@@ -430,7 +430,7 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
 
                 //5 Defender
                 if (this.constant.roomHostile) {
-                    parent.parent.parent.messenger("INFO",this.name,"Attacked type: ${this.constant.roomHostileType} num:${this.constant.roomHostileNum}", COLOR_RED)
+                    parent.mainRoomCollector.mainContext.messenger("INFO",this.name,"Attacked type: ${this.constant.roomHostileType} num:${this.constant.roomHostileNum}", COLOR_RED)
                     if (this.constant.roomHostileNum > 1 ) {
                         if (this.room == null) this.need[0][4] = 1
                     }
@@ -447,7 +447,7 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
                 this.need[1][15] = 1
 
                 if (this.source.containsKey(0) && this.rescueFlag.containsKey(0)) this.need[1][20] = 1
-                val carrierAuto0: CacheCarrier? = parent.parent.parent.getCacheRecordRoom("slaveContainer0",this.parent,this)
+                val carrierAuto0: CacheCarrier? = parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer0",this.parent,this)
                 //if (this.name == "E56N34") console.log("null")
                 if (carrierAuto0!=null) {
                     //if (this.name == "E56N34") console.log("${carrierAuto0.needCarriers}")
@@ -455,13 +455,13 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
                 }
 
                 if (this.source.containsKey(1) && this.rescueFlag.containsKey(1)) this.need[1][22] = 1
-                val carrierAuto1: CacheCarrier? = parent.parent.parent.getCacheRecordRoom("slaveContainer1",this.parent,this)
+                val carrierAuto1: CacheCarrier? = parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer1",this.parent,this)
                 if (carrierAuto1!=null) {
                     if (this.need[1][23] == 0) this.need[1][23] = carrierAuto1.needCarriers
                 }
 
                 if (this.source.containsKey(2) && this.rescueFlag.containsKey(2)) this.need[1][24] = 1
-                val carrierAuto2: CacheCarrier? = parent.parent.parent.getCacheRecordRoom("slaveContainer2",this.parent,this)
+                val carrierAuto2: CacheCarrier? = parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer2",this.parent,this)
                 if (carrierAuto2!=null) {
                     if (this.need[1][25] == 0) this.need[1][25] = carrierAuto2.needCarriers
                 }
@@ -472,7 +472,7 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
                     if (mineral.mineralAmount > 0) {
                         if (parent.getResource(mineral.mineralType) < parent.constant.mineralMaxInRoom)
                             this.need[1][26] = 1
-                        else parent.parent.parent.messenger("INFO", this.name, "Mineral full in parent room", COLOR_RED)
+                        else parent.mainRoomCollector.mainContext.messenger("INFO", this.name, "Mineral full in parent room", COLOR_RED)
                     }
 
                     this.need[1][27] = this.have[26]
@@ -493,9 +493,9 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
 
     private fun setNextTickRun(): Boolean {
         if (this.constant.roomRunNotEveryTickNextTickRun > Game.time) return false
-        this.constant.roomRunNotEveryTickNextTickRun = Game.time + Random.nextInt(parent.parent.parent.constants.globalConstant.roomRunNotEveryTickTicksPauseMin,
-                parent.parent.parent.constants.globalConstant.roomRunNotEveryTickTicksPauseMax)
-        parent.parent.parent.messenger("TEST", this.name, "Slave room not every tick run. Next tick: ${this.constant.roomRunNotEveryTickNextTickRun}", COLOR_GREEN)
+        this.constant.roomRunNotEveryTickNextTickRun = Game.time + Random.nextInt(parent.mainRoomCollector.mainContext.constants.globalConstant.roomRunNotEveryTickTicksPauseMin,
+                parent.mainRoomCollector.mainContext.constants.globalConstant.roomRunNotEveryTickTicksPauseMax)
+        parent.mainRoomCollector.mainContext.messenger("TEST", this.name, "Slave room not every tick run. Next tick: ${this.constant.roomRunNotEveryTickNextTickRun}", COLOR_GREEN)
         return true
     }
 
@@ -515,7 +515,7 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
             this.profitClear()
         }
 
-        if (this.constant.profitPerTickPreviousArr[0] > parent.parent.parent.constants.globalConstant.showProfitWhenLessWhen * this.source.size ) return
+        if (this.constant.profitPerTickPreviousArr[0] > parent.mainRoomCollector.mainContext.constants.globalConstant.showProfitWhenLessWhen * this.source.size ) return
 
 
         var sProfitPT = "0"
@@ -531,7 +531,7 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
         val sTicks: String = (Game.time - this.constant.profitStart).toString().padEnd(8)
         val sSources = this.source.size.toString()
 
-        parent.parent.parent.messenger("PROFIT", this.describe,
+        parent.mainRoomCollector.mainContext.messenger("PROFIT", this.describe,
                 "Profit ----> ${this.name} Road: ${this.constant.roadBuild.toString().padEnd(5)} ($sProfitPT per. 1500 ticks) ticks: $sTicks  + $sUp  - $sDown  $sProfit ($sProfitPerTickPrevious sources: $sSources)", COLOR_WHITE)
     }
 

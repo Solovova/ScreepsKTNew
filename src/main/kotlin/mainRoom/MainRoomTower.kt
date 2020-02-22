@@ -10,22 +10,22 @@ fun MainRoom.runTower() {
 
     //0
     val hostile = this.room.find(FIND_HOSTILE_CREEPS)
-    if (fTask == null) {
-        val damagedStructures = this.room.find(FIND_STRUCTURES).filter {
-            (it.structureType == STRUCTURE_RAMPART || it.structureType == STRUCTURE_WALL) && (it.hits < 100000)
-        }
-
-        if (damagedStructures.isNotEmpty() && hostile.isNotEmpty()) {
-            var fMinHealth = 300000000
-            for (i in 0 until damagedStructures.size) {
-                if (damagedStructures[i].hits < fMinHealth) {
-                    fTarget = damagedStructures[i]
-                    fMinHealth = damagedStructures[i].hits
-                }
-            }
-            fTask = "repair"
-        }
-    }
+//    if (fTask == null) {
+//        val damagedStructures = this.room.find(FIND_STRUCTURES).filter {
+//            (it.structureType == STRUCTURE_RAMPART || it.structureType == STRUCTURE_WALL) && (it.hits < 100000)
+//        }
+//
+//        if (damagedStructures.isNotEmpty() && hostile.isNotEmpty()) {
+//            var fMinHealth = 300000000
+//            for (i in 0 until damagedStructures.size) {
+//                if (damagedStructures[i].hits < fMinHealth) {
+//                    fTarget = damagedStructures[i]
+//                    fMinHealth = damagedStructures[i].hits
+//                }
+//            }
+//            fTask = "repair"
+//        }
+//    }
 
     //1
     if (fTask == null) {

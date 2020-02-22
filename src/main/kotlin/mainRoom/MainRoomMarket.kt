@@ -1,14 +1,13 @@
 package mainRoom
 
-import mainContext.marketGetSellOrdersSorted
 import screeps.api.*
 import screeps.utils.toMap
 
 fun MainRoom.marketCreateBuyOrders() {
     if (!this.constant.marketBuyEnergy) return
-    if (Game.market.credits < this.parent.parent.constants.globalConstant.marketMinCreditForOpenBuyOrder) return
+    if (Game.market.credits < this.mainRoomCollector.mainContext.constants.globalConstant.marketMinCreditForOpenBuyOrder) return
 
-    val priceEnergy = parent.parent.constants.globalConstant.marketBuyPriceEnergy
+    val priceEnergy = mainRoomCollector.mainContext.constants.globalConstant.marketBuyPriceEnergy
     if ((this.getResourceInTerminal() + this.getResourceInStorage()) < 300000) {
         val orders = Game.market.orders.toMap().filter {
             it.value.roomName == this.name
@@ -27,7 +26,7 @@ fun MainRoom.marketCreateBuyOrders() {
 fun MainRoom.marketCreateBuyOrdersMineral() {
     return
     if (this.name != "E54N39") return
-    if (Game.market.credits < this.parent.parent.constants.globalConstant.marketMinCreditForOpenBuyOrder) return
+    if (Game.market.credits < this.mainRoomCollector.mainContext.constants.globalConstant.marketMinCreditForOpenBuyOrder) return
 
     val buyPrice = 0.036
     val buyMineral: ResourceConstant = RESOURCE_KEANIUM

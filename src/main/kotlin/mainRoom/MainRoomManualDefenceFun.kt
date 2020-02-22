@@ -3,12 +3,11 @@ package mainRoom
 import mainRoom
 import role
 import screeps.api.*
-import screeps.utils.toMap
 import subRole
 
 fun MainRoom.manualDefenceInStartOfTick() {
     // Group GoTo
-    val flagGoTo: Flag? = parent.flags.firstOrNull {
+    val flagGoTo: Flag? = mainRoomCollector.flags.firstOrNull {
         it.color == this.constant.manualDefenceRoomMainColorFlag
                 && it.secondaryColor == COLOR_RED
     }
@@ -37,14 +36,14 @@ fun MainRoom.manualDefenceInStartOfTick() {
             RecordMove(COLOR_ORANGE, 0, -1, "top"),
             RecordMove(COLOR_BROWN, 0, 1, "bottom"))
 
-    val flagBorder: Flag? = parent.flags.firstOrNull {
+    val flagBorder: Flag? = mainRoomCollector.flags.firstOrNull {
         it.color == this.constant.manualDefenceRoomMainColorFlag
                 && it.secondaryColor == COLOR_WHITE
     }
 
     for (listMoveRecord in listMove) {
 
-        val flagMove: Flag? = parent.flags.firstOrNull {
+        val flagMove: Flag? = mainRoomCollector.flags.firstOrNull {
             it.color == this.constant.manualDefenceRoomMainColorFlag
                     && it.secondaryColor == listMoveRecord.color
         }
@@ -103,7 +102,7 @@ fun MainRoom.manualDefenceInStartOfTick() {
     }
 
     //Group target
-    val flagTarget: Flag? = parent.flags.firstOrNull {
+    val flagTarget: Flag? = mainRoomCollector.flags.firstOrNull {
         it.color == this.constant.manualDefenceRoomMainColorFlag
                 && it.secondaryColor == COLOR_GREY
     }

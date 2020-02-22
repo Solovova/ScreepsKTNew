@@ -5,7 +5,6 @@ import screeps.api.ResourceConstant
 import LabFillerTask
 import screeps.api.RESOURCE_ENERGY
 import CreepTask
-import screeps.api.get
 import screeps.utils.toMap
 import kotlin.math.min
 
@@ -19,7 +18,7 @@ fun MainRoom.setLabFillerTask(creep: Creep) {
     if (creep.carry.toMap().map { it.value }.sum() != 0) {
         val resTransfer = creep.carry.toMap().filter { it.value != 0 }.toList().firstOrNull()
         if (resTransfer != null) {
-            parent.parent.tasks.add(creep.id, CreepTask(TypeOfTask.TransferTo, terminal.id, terminal.pos,
+            mainRoomCollector.mainContext.tasks.add(creep.id, CreepTask(TypeOfTask.TransferTo, terminal.id, terminal.pos,
                     resource = resTransfer.first, quantity = resTransfer.second))
             return
         }
@@ -51,7 +50,7 @@ fun MainRoom.setLabFillerTask(creep: Creep) {
     if (this.constant.reactionActive != "") {
         val reaction = this.constant.reactionActive.unsafeCast<ResourceConstant>()
         if (this.structureLabSort.size !in arrayOf(3, 6, 10)) return
-        val reactionComponent = this.parent.parent.constants.globalConstant.labReactionComponent[reaction]
+        val reactionComponent = this.mainRoomCollector.mainContext.constants.globalConstant.labReactionComponent[reaction]
                 ?: return
         if (reactionComponent.size != 2) return
 
@@ -109,7 +108,7 @@ fun MainRoom.setLabFillerTask(creep: Creep) {
         val tmpTask: LabFillerTask? = listTasks.toMutableList().maxBy { it.priority }
         if (tmpTask != null) {
             //console.log("${tmpTask.StructureFrom}  ${tmpTask.StructureTo} ${tmpTask.quantity} ${tmpTask.resource}")
-            parent.parent.tasks.add(creep.id, CreepTask(TypeOfTask.Transport, tmpTask.StructureFrom.id, tmpTask.StructureFrom.pos,
+            mainRoomCollector.mainContext.tasks.add(creep.id, CreepTask(TypeOfTask.Transport, tmpTask.StructureFrom.id, tmpTask.StructureFrom.pos,
                     tmpTask.StructureTo.id, tmpTask.StructureTo.pos, tmpTask.resource, min(creep.carryCapacity, tmpTask.quantity)))}
     }
 }

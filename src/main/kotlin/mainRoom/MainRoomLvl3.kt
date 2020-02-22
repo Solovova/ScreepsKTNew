@@ -27,7 +27,7 @@ fun MainRoom.needCorrection3() {
 
     if (this.getResourceInStorage() > this.constant.energyBuilder) {
         //ToDo temporary
-        this.need[1][19]=1
+        //this.need[1][19]=1
     }
 
     //2.1 Small upgrader
@@ -62,7 +62,7 @@ fun MainRoom.needCorrection3() {
         if (getResource(this.mineral.mineralType) < (this.constant.mineralMaxInRoom+50000))
             this.need[1][15] = 1
         if (getResource(this.mineral.mineralType) > this.constant.mineralMaxInRoom)
-            parent.parent.messenger("INFO", this.name, "Mineral full", COLOR_RED)
+            mainRoomCollector.mainContext.messenger("INFO", this.name, "Mineral full", COLOR_RED)
     }
 
     val container: StructureContainer? = this.structureContainerNearMineral[0]

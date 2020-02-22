@@ -42,12 +42,6 @@ fun constantMainRoomInitMain(mainRoom: MainRoom) {
     if (mainRoom.name == "E59N36") mainRoom.needMineral["Z".unsafeCast<ResourceConstant>()] = 10000
     if (mainRoom.name == "E57N39") mainRoom.needMineral["U".unsafeCast<ResourceConstant>()] = 10000
 
-
-
-
-
-
-
     //if(mainRoom.name == "E54N39") mainRoom.constant.defenceHits = 4000000
 }
 
