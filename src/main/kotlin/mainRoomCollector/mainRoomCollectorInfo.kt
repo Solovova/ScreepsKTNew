@@ -55,7 +55,7 @@ fun MainRoomCollector.infoShow() {
                     COLOR_ORANGE,
                     9),
             MainRoomInfoSetup(TypeOfMainRoomInfo.infoNeedBuild,
-                    "Need build",
+                    "Need building",
                     COLOR_YELLOW,
                     COLOR_RED,
                     40),

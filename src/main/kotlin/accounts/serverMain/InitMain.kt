@@ -46,8 +46,8 @@ fun Constants.initMainBody() {
 //    m(4).sentEnergyToRoom = "E54N37"
 //    m(6).sentEnergyToRoom = "E54N37"
 
-    m(0).marketBuyEnergy = true
-    //m(7).creepUpgradeRole[7] = true
+    m(0).marketBuyEnergy = false
+    m(14).creepUpgradeRole[7] = true
     //m(6).creepUpgradeRole[7] = true
     //m(3).creepUpgradeRole[7] = true
 
@@ -56,12 +56,12 @@ fun Constants.initMainBody() {
     m(2).reactionActive = "GH2O"
     m(3).reactionActive = "GH2O"
     m(4).reactionActive = "GH2O"
-    m(5).reactionActive = ""
-    m(6).reactionActive = ""
-    m(7).reactionActive = "" //XGH2O
-    m(8).reactionActive = ""
-    m(9).reactionActive = ""
-    m(10).reactionActive = ""
+    m(5).reactionActive = "GH2O"
+    m(6).reactionActive = "GH2O"
+    m(7).reactionActive = "GH2O" //XGH2O
+    m(8).reactionActive = "GH2O"
+    m(9).reactionActive = "GH2O"
+    m(10).reactionActive = "GH2O"
     m(11).reactionActive = ""
     m(12).reactionActive = ""
     m(13).reactionActive = ""

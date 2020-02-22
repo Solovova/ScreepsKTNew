@@ -1,6 +1,5 @@
 package constants
 
-import battleGroup.BattleGroup
 import mainContext.messenger
 import screeps.api.*
 
@@ -45,6 +44,7 @@ class MainRoomConstant(val parent: Constants) {
 
     //Mineral
     var mineralMaxInRoom: Int = 200000
+    var mineralAllMaxInStorage: Int = 500000
 
     //Wall and Ramparts upgrade
     var defenceHits: Int    = 200000
@@ -65,14 +65,14 @@ class MainRoomConstant(val parent: Constants) {
     private fun getSlaveRoomConstant(slaveRoomName: String) : SlaveRoomConstant {
         val slaveRoomConstant:SlaveRoomConstant ? = this.slaveRoomConstantContainer[slaveRoomName]
         return if (slaveRoomConstant == null) {
-            parent.parent.messenger("ERROR", slaveRoomName, "initialization don't see SlaveRoomConstant", COLOR_RED)
+            parent.mainContext.messenger("ERROR", slaveRoomName, "initialization don't see SlaveRoomConstant", COLOR_RED)
             SlaveRoomConstant()
         }else slaveRoomConstant
     }
 
     fun s(index: Int) : SlaveRoomConstant {
         if (index >= this.slaveRooms.size) {
-            parent.parent.messenger("ERROR", "$index", "initialization S out of range slave room", COLOR_RED)
+            parent.mainContext.messenger("ERROR", "$index", "initialization S out of range slave room", COLOR_RED)
             return SlaveRoomConstant()
         }
         return this.getSlaveRoomConstant(this.slaveRooms[index])

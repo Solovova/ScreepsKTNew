@@ -29,7 +29,7 @@ fun MainRoom.needCorrection2() {
             this.need[1][7]=2
             this.need[2][7]=2
         }else{
-            this.need[1][7]=1
+            this.need[1][7]=4
             this.need[2][7]=0
         }
     }else{

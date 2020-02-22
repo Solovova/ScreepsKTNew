@@ -1,9 +1,9 @@
 package constants
 
-import REACTIONS
+
 import screeps.api.*
 
-class GlobalConstant {
+class GlobalConstant(val constants: Constants) {
     val dataCacheCarrierAuto: MutableMap<String, CacheCarrier> = mutableMapOf() //cashed
     val roomRunNotEveryTickTicksPauseMin: Int = 300
     val roomRunNotEveryTickTicksPauseMax: Int = 400
@@ -22,15 +22,11 @@ class GlobalConstant {
     //CreepUpgrades
     //if in room set it more priority
     val creepUpgradableParts: MutableMap<Int, Map<BodyPartConstant,ResourceConstant>> = mutableMapOf()
-
     val labReactionComponent: MutableMap<ResourceConstant,Array<ResourceConstant>> = mutableMapOf()
 
     init {
-        for (key0 in js("Object").keys(REACTIONS).unsafeCast<Array<ResourceConstant>>())
-            for (key1 in js("Object").keys(REACTIONS[key0]).unsafeCast<Array<ResourceConstant>>())
-                labReactionComponent[REACTIONS[key0][key1].unsafeCast<ResourceConstant>()] = arrayOf(key0,key1)
-
-        creepUpgradableParts[7] = mutableMapOf<BodyPartConstant,ResourceConstant>(WORK to "XGH2O".unsafeCast<ResourceConstant>())
+        constants.mainContext.logicUpgrade.setGlobalConstants(this)
+        constants.mainContext.logicLab.setGlobalConstants(this)
     }
 
 

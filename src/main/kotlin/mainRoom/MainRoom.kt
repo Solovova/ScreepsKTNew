@@ -951,8 +951,7 @@ class MainRoom(val parent: MainRoomCollector, val name: String, val describe: St
     }
 
     private fun runReactions() {
-        if (this.constant.reactionActive == "") return
-        if (this.structureLabSort.size !in arrayOf(3, 6, 10)) return
+        if (!this.boolRunLab()) return
         val lab0 = this.structureLabSort[0] ?: return
         val lab1 = this.structureLabSort[1] ?: return
         val reaction = this.constant.reactionActive.unsafeCast<ResourceConstant>()

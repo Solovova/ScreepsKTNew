@@ -67,7 +67,7 @@ fun MainRoom.getInfoConstructionSites(): MainRoomInfoRecord {
 
     if (this.constructionSite.isEmpty()) return resultEmpty
     this.structureController[0] ?: return resultEmpty
-    return MainRoomInfoRecord("build: ${this.constructionSite.size}",true)
+    return MainRoomInfoRecord("building: ${this.constructionSite.size}",true)
 }
 
 fun MainRoom.getInfoEnergy(): MainRoomInfoRecord {
