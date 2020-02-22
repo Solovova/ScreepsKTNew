@@ -20,7 +20,7 @@ fun Constants.initMainHead() {                   //M0       M1       M2       M3
     //this.getMainRoomConstant("E52N35").initSlaveRoomConstantContainer(arrayOf("E52N34"))                                //M2
     this.getMainRoomConstant("E53N39").initSlaveRoomConstantContainer(arrayOf("E52N39"))                                //M4
     this.getMainRoomConstant("E54N39").initSlaveRoomConstantContainer(arrayOf("E54N38"))                                //M6
-    this.getMainRoomConstant("E51N39").initSlaveRoomConstantContainer(arrayOf("E51N38","E49N39"))                                //M7
+    this.getMainRoomConstant("E51N39").initSlaveRoomConstantContainer(arrayOf("E51N38"))                                //M7
     this.getMainRoomConstant("E59N38").initSlaveRoomConstantContainer(arrayOf("E59N37","E59N39"))                       //M10
     //this.getMainRoomConstant("E57N34").initSlaveRoomConstantContainer(arrayOf("E57N33","E56N33","E56N34"))              //M11
     //this.getMainRoomConstant("E51N33").initSlaveRoomConstantContainer(arrayOf("E51N34"))                        //M12
@@ -47,16 +47,15 @@ fun Constants.initMainBody() {
 //    m(6).sentEnergyToRoom = "E54N37"
 
     m(0).marketBuyEnergy = true
-    s(7,1).model = 1
     //m(7).creepUpgradeRole[7] = true
     //m(6).creepUpgradeRole[7] = true
     //m(3).creepUpgradeRole[7] = true
 
-    m(0).reactionActive = ""  //ZK
+    m(0).reactionActive = "GH2O"
     m(1).reactionActive = ""
-    m(2).reactionActive = ""
-    m(3).reactionActive = "" //XGH2O
-    m(4).reactionActive = "" //UL
+    m(2).reactionActive = "GH2O"
+    m(3).reactionActive = "GH2O"
+    m(4).reactionActive = "GH2O"
     m(5).reactionActive = ""
     m(6).reactionActive = ""
     m(7).reactionActive = "" //XGH2O

@@ -12,6 +12,10 @@ fun MainRoom.setLogistTask(creep: Creep) {
     val link = this.structureLinkNearStorage[0]
     val storage = this.structureStorage[0]
 
+    if (creep.name == "mst_E53N39_E53N39_24625084") {
+        console.log("Test ...")
+    }
+
     if (getLevelOfRoom() == 3 && this.have[19] != 0 && this.source.size == 1) {
         if (link != null && link.energy < link.energyCapacity && storage != null) {
             val transportQuantity: Int = min(link.energyCapacity - link.energy, creep.carryCapacity)
@@ -29,6 +33,8 @@ fun MainRoom.setLogistTask(creep: Creep) {
     val terminal = this.structureTerminal[0]
     if (terminal == null || storage == null) return
     var carry: Int
+
+
 
     // 01 Terminal > 0 && Storage < this.constant.energyMinStorage
     val needInStorage01: Int = this.constant.energyMinStorage - this.getResourceInStorage()

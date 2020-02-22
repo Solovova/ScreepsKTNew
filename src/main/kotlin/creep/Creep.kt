@@ -42,12 +42,12 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
 
     //Костыль
     //if (mainRoom.name in setOf("E53N39")) {
-    val storage: StructureStorage? = mainRoom.structureStorage[0]
-    val sum = storage?.store?.values?.sum()
-    if (sum != null && sum > 800000) {
-        if (!isTask) isTask = this.cleanStorageFromMinerals(creepCarry, mainContext, mainRoom)
-        if (!isTask) isTask = this.drop(creepCarry, mainContext)
-    }
+//    val storage: StructureStorage? = mainRoom.structureStorage[0]
+//    val sum = storage?.store?.values?.sum()
+//    if (sum != null && sum > 800000) {
+//        if (!isTask) isTask = this.cleanStorageFromMinerals(creepCarry, mainContext, mainRoom)
+//        if (!isTask) isTask = this.drop(creepCarry, mainContext)
+//    }
     //}
 
     //00 starting creep, harvester, upgrader, builder to level 4

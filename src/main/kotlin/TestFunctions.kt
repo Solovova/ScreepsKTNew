@@ -1,12 +1,14 @@
+import creep.newTask
 import mainContext.MainContext
 import mainContext.messenger
 import mainRoom.MainRoom
 import mainRoom.doSnapShot
 import screeps.api.*
+import screeps.utils.unsafe.delete
 import slaveRoom.SlaveRoom
 import kotlin.math.roundToInt
 
-fun testingFunctions (mainContext : MainContext) {
+fun testingFunctions(mainContext: MainContext) {
 //    val mCash:MutableMap<ResourceConstant,Int> = mutableMapOf()
 //    //mCash[RESOURCE_ENERGY] = 110
 //    mCash[RESOURCE_CATALYST] = 200
@@ -81,4 +83,14 @@ fun testingFunctions (mainContext : MainContext) {
 //    for (cs in Game.constructionSites.values) {
 //        cs.remove()
 //    }
+
+    //
+//    val idCreep = "5e50fb766382d6546b5d0304"
+//    console.log(mainContext.tasks.tasks[idCreep]?.type)
+//    console.log(mainContext.tasks.tasks[idCreep]?.idObject0)
+//    console.log(mainContext.tasks.tasks[idCreep]?.idObject1)
+//    console.log(mainContext.tasks.tasks[idCreep]?.quantity)
+//    console.log(mainContext.tasks.tasks[idCreep]?.resource)
+
+    //delete(mainContext.tasks.tasks[idCreep])
 }

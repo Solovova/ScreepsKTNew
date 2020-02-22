@@ -3,7 +3,7 @@ In future
 //ToDo если в комнате минерала больше чем надо не прозводить
 //ToDo разобраться почему нет минералов
 //ToDo тестировать при downgrade controller
-//ToDo убирать комнаты из констант если не видно ее
+//ToDo автоподстройка цен мин макс
 
 //Main
 // 0 - universal +
@@ -109,7 +109,7 @@ for (key in js("Object").keys(testMutable.asDynamic()).unsafeCast<Array<String>>
 // 3 COLOR_BLUE      - restore snapshot of room only Roads
 // 4 COLOR_CYAN      - restore snapshot of room only Wall and Ramparts
 // 5 COLOR_GREEN     - restore snapshot of room all
-// 6 COLOR_YELLOW
+// 6 COLOR_YELLOW    - do not restore snapshot for this room
 // 7 COLOR_ORANGE
 // 8 COLOR_BROWN
 // 9 COLOR_GREY

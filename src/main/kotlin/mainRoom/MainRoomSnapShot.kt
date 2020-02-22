@@ -14,6 +14,9 @@ fun MainRoom.doSnapShot() {
 
 fun MainRoom.restoreSnapShot(){
     if (this.room.find(FIND_CONSTRUCTION_SITES).isNotEmpty()) return
+    val flags = this.room.find(FIND_FLAGS).filter { it.color == COLOR_RED && it.secondaryColor == COLOR_YELLOW }
+    if (flags.isNotEmpty()) return
+
     if (Memory["snap"] == null || Memory["snap"][this.name] == null){
         parent.parent.messenger("INFO", this.name, "Snapshot not present", COLOR_RED)
         return
@@ -24,11 +27,11 @@ fun MainRoom.restoreSnapShot(){
 }
 
 fun MainRoom.directControl() {
-    var flags = this.room.find(FIND_FLAGS).filter { it.color == COLOR_RED && it.secondaryColor == COLOR_GREEN }
-    if (flags.isNotEmpty()) this.restoreSnapShot()
-    for (flag in flags) flag.remove()
+    val flagsRedGreen = this.room.find(FIND_FLAGS).filter { it.color == COLOR_RED && it.secondaryColor == COLOR_GREEN }
+    if (flagsRedGreen.isNotEmpty()) this.restoreSnapShot()
+    for (flag in flagsRedGreen) flag.remove()
 
-    flags = this.room.find(FIND_FLAGS).filter { it.color == COLOR_RED && it.secondaryColor == COLOR_RED }
-    if (flags.isNotEmpty()) this.doSnapShot()
-    for (flag in flags) flag.remove()
+    val flagsRedRed = this.room.find(FIND_FLAGS).filter { it.color == COLOR_RED && it.secondaryColor == COLOR_RED }
+    if (flagsRedRed.isNotEmpty()) this.doSnapShot()
+    for (flag in flagsRedRed) flag.remove()
 }
