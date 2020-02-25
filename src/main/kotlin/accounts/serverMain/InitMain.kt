@@ -1,13 +1,9 @@
 package accounts.serverMain
 
 import constants.Constants
-import screeps.api.ResourceConstant
 
 //Call before init of constants
-fun Constants.initMainHead() {                   //M0       M1       M2       M3       M4       M5       M6        M7        M8        M9
-//    this.initMainRoomConstantContainer( arrayOf("E54N37","E59N36","E52N35","E52N38","E53N39","E52N37","E54N39", "E51N39", "E53N38", "E51N37",
-//                                                "E59N38","E57N34","E51N33","E51N35","E58N37","E52N36","E57N32", "E58N39", "E57N39", "E57N35",
-//                                                "E57N37","E52N33","E58N31") )
+fun Constants.initMainHead() {
 
                                                //M0       M1       M2       M3       M4       M5       M6        M7        M8        M9
     this.initMainRoomConstantContainer( arrayOf("E54N37","E59N36","E52N38","E52N37","E54N39","E51N39","E53N38","E51N37",
@@ -55,14 +51,14 @@ fun Constants.initMainBody() {
     m(1).reactionActive = ""
     m(2).reactionActive = "GH2O"
     m(3).reactionActive = "GH2O"
-    m(4).reactionActive = "GH2O"
-    m(5).reactionActive = "GH2O"
-    m(6).reactionActive = "GH2O"
-    m(7).reactionActive = "GH2O"
-    m(8).reactionActive = "GH2O"
-    m(9).reactionActive = "GH2O"
-    m(10).reactionActive = "GH2O"
-    m(11).reactionActive = ""
+    m(4).reactionActive = "ZK"
+    m(5).reactionActive = "UL"
+    m(6).reactionActive = "G"
+    m(7).reactionActive = "GH"
+    m(8).reactionActive = "OH"
+    m(9).reactionActive = "GH"
+    m(10).reactionActive = "OH"
+    m(11).reactionActive = "OH"
     m(12).reactionActive = ""
     m(13).reactionActive = ""
     m(14).reactionActive = ""
