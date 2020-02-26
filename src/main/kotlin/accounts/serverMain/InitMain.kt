@@ -20,7 +20,7 @@ fun Constants.initMainHead() {
     this.getMainRoomConstant("E51N37").initSlaveRoomConstantContainer(arrayOf())                                        //M7
     this.getMainRoomConstant("E59N38").initSlaveRoomConstantContainer(arrayOf("E59N37","E59N39"))                       //M8
     this.getMainRoomConstant("E58N37").initSlaveRoomConstantContainer(arrayOf("E58N38"))                                //M9
-    this.getMainRoomConstant("E52N36").initSlaveRoomConstantContainer(arrayOf("E51N36","E53N36"))                       //M10
+    this.getMainRoomConstant("E52N36").initSlaveRoomConstantContainer(arrayOf("E51N36","E53N36","E52N35","E51N35"))                       //M10
     this.getMainRoomConstant("E58N39").initSlaveRoomConstantContainer(arrayOf())                                        //M11
     this.getMainRoomConstant("E57N39").initSlaveRoomConstantContainer(arrayOf("E56N39","E57N38","E56N38"))              //M12
     this.getMainRoomConstant("E57N37").initSlaveRoomConstantContainer(arrayOf("E57N36"))                                //M13
@@ -43,6 +43,8 @@ fun Constants.initMainBody() {
     m(14).creepUpgradeRole[7] = true
     s(5,1).model = 1
     s(15,1).model = 1
+    s(10,2).model = 1
+    s(10,3).model = 1
     //m(6).creepUpgradeRole[7] = true
     //m(3).creepUpgradeRole[7] = true
 
